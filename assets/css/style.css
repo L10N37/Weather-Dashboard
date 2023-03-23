@@ -4,7 +4,7 @@ body {
 }
 
 body{
-  background-color: whitesmoke;
+  background-color: lightgrey;
 }
 
 headerTitle{
@@ -32,7 +32,6 @@ border: orange outset;
 
 input{
   height: 24px;
-  width: 45%;
   /* remove default behaviour */
   outline:none;
   border-top-style: hidden;

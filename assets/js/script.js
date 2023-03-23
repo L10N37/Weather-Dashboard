@@ -24,6 +24,14 @@ limit 	optional 	Number of the locations in the API response (up to 5 results ca
 Example of API call
 http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid={API key}
 
+
+You can search weather forecast for 5 days with data every 3 hours by geographic coordinates. All weather data can be obtained in JSON and XML formats.
+
+How to make an API call
+
+API call
+api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key} 
+
 */
 
 let APIKey= "15f30b5439aba93a71279745353860e6";
@@ -34,6 +42,13 @@ let globalCoordinatesLat= [];
 let globalCoordinatesLon= [];
 let globalSpacing = '&nbsp&nbsp&nbsp&nbsp'
 let searchConfirmationBoxes = ['box1','box2','box3','box4','box5']
+let globalWeatherStats = [];
+
+  // Click event listener on search button
+  getID("searchButton").addEventListener("click", function(event) {
+    clickedSearch(getID("searchTextEntry").value);
+})
+
 
 function clickedSearch(searchQuery) {
     
@@ -47,48 +62,30 @@ function clickedSearch(searchQuery) {
       }
     }
     
-  
     console.log("Search Query: " + searchQuery);
     
     fetch("http://api.openweathermap.org/geo/1.0/direct?q="+searchQuery+"&limit=5&appid="+APIKey)
       .then(response => response.json())
         .then(data => toObject(data))
-    
-      // create possible matches element for search confirmation, append to search container area
-      for (let i = 0; i < 5; i++) {
-        let y= document.createElement("div");
-        y.className= "possibleMatchesClass";
-        y.id=searchConfirmationBoxes[i];
-        getClass("searchAreaContainer").appendChild(y);
-      }
-    // Click event listener on search options
-    for (let i = 0; i < 5; i++) {
-      getID(searchConfirmationBoxes[i]).addEventListener("click", function(event) {
-        console.log("Clicked: " +searchConfirmationBoxes[i])
-        
 
-
-
-
-          })
-        }
 }
- 
-  // Click event listener on search button
-  getID("searchButton").addEventListener("click", function(event) {
-    clickedSearch(getID("searchTextEntry").value);
-})
-
 
 // This takes the returned fetch data and stores it as an object variable so we can use this data
-// in the application, it also sets up the search options inner text, it's placed here instead of 
-// with the rest of the element creation because placing it here allows the variable containing
-// the fetched object to exist first.
+// in the application, it also sets up the search options inner text, element creation is placed here 
+//because it allows the variable containing the fetched object to exist first.
 let toObject = (data) => {
   globalObjectStorage = data;
   console.log(globalObjectStorage);
-  console.log(globalObjectStorage.length);
 
+// create possible matches element for search confirmation, append to search container area
+// globalObjectStorage length check is to ensure a dud search doesn't create the search options element/s
+if (globalObjectStorage.length > 0) {
+  for (let i = 0; i < 5; i++) {
+    let y= document.createElement("div");
+      y.className= "possibleMatchesClass";
+        y.id=searchConfirmationBoxes[i];
+          getClass("searchAreaContainer").appendChild(y);
+          }
   // extract/ format the information we need from fetched object
   // globalObjectStorage.length is == fetches "&limit=X", default X= 5.
   for (let i = 0; i < globalObjectStorage.length; i++) {
@@ -103,7 +100,17 @@ let toObject = (data) => {
     "<br>";
 
     console.log("Area" + i +" Coordinates-- " + "Latitude:"+globalCoordinatesLat[i]+ " Longitude:"+ globalCoordinatesLon[i]);
-    }
+
+        // Click event listener on search options IF a valid search was performed
+        if(getClass("possibleMatchesClass")) {
+          for (let i = 0; i < 5; i++) {
+            getID(searchConfirmationBoxes[i]).addEventListener("click", function(event) {
+              console.log("Clicked: " +searchConfirmationBoxes[i])
+                })
+              }
+            }
+      }
+   }
 }
 
 // just functions where the syntax for common calls is modified to my own liking
