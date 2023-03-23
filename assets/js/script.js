@@ -65,6 +65,15 @@ function clickedSearch(searchQuery) {
     clickedSearch(getID("searchTextEntry").value);
 })
 
+  // Click event listener on search options
+  for (let i = 0; i < 5; i++) {
+    getID("searchButton").addEventListener("click", function(event) {
+   
+    })
+  }
+
+
+
 // This takes the returned fetch data and stores it as an object variable so we can use this data
 // in the application, it also sets up the search options inner text, it's placed here instead of 
 // with the rest of the element creation because placing it here allows the variable containing

@@ -41,10 +41,14 @@ input{
   border-bottom-style: hidden;
   /*                          */
 }
+
+div#search{
+  padding-bottom:5px;
+}
+
 input:focus{
   font-style: normal;
-  border-bottom: purple solid;
-  
+  border: purple solid;
 }
 
 #searchButton.button-21{
