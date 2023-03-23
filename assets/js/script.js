@@ -1,5 +1,7 @@
 /*
-Built-in API request by city name
+Built-in API request by city name - 
+!!!!!! [THIS IS DEPRECATED, BY THE LOOK OF THE GRADING PAGE, THEY WANT US TO CONVERT A CITY SEARCH
+INTO COORDINATES AND PASS THAT ACROSS TO THE API INSTEAD]
 
 You can search weather forecast for 5 days with data every 3 hours by city name. All weather data can be obtained in JSON and XML formats.
 
@@ -8,7 +10,7 @@ api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
 api.openweathermap.org/data/2.5/forecast?q={city name},{country code}&appid={API key}
 api.openweathermap.org/data/2.5/forecast?q={city name},{state code},{country code}&appid={API key}
 
-
+!!!!! [THIS GETS US COORDINATES BY LOCATION NAME FOR PASSING TO THE API]
 Coordinates by location name
 How to make an API call
 
