@@ -57,6 +57,14 @@ function clickedSearch(searchQuery) {
         y.id=searchConfirmationBoxes[i];
         getClass("searchAreaContainer").appendChild(y);
       }
+
+        // Click event listener on search options
+  for (let i = 0; i < 5; i++) {
+    getID(searchConfirmationBoxes[i]).addEventListener("click", function(event) {
+      console.log("Clicked" +searchConfirmationBoxes[i])
+    })
+  }
+
  
 }
  
@@ -64,14 +72,6 @@ function clickedSearch(searchQuery) {
   getID("searchButton").addEventListener("click", function(event) {
     clickedSearch(getID("searchTextEntry").value);
 })
-
-  // Click event listener on search options
-  for (let i = 0; i < 5; i++) {
-    getID("searchButton").addEventListener("click", function(event) {
-   
-    })
-  }
-
 
 
 // This takes the returned fetch data and stores it as an object variable so we can use this data
@@ -91,17 +91,10 @@ let toObject = (data) => {
     getID(searchConfirmationBoxes[i]).innerHTML= 
     "Country: "+ globalCountries[i] +
     globalSpacing +
-   "Name: "+ globalCities[i] +
+   "City: "+ globalCities[i] +
     "<br>";
     }
-
-
-
-  //console.log(globalCountries);
-  //console.log(globalCities);
 }
-
-
 
 // just functions where the syntax for common calls is modified to my own liking
 function getID(ID){
