@@ -1,0 +1,62 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}
+
+body{
+  background-color: whitesmoke;
+}
+
+headerTitle{
+font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+font-size: 2em;
+text-align: center;
+color:white;
+position:absolute;
+text-align:center;
+background-image:url('../images/blue-sky-with-white-clouds-sky-background.jpg');
+background-size: cover;
+background-position: center;
+width: 100%;
+border: orange outset;
+}
+
+.searchAreaContainer{
+  overflow: hidden;
+  float: left;
+  position:absolute;
+  top:10%;
+  padding-bottom:20px;
+  border-bottom: orange solid;
+}
+
+input{
+  padding: 8px 16px;
+}
+
+button{
+display: inline-block;
+outline: 0;
+border: 0;
+cursor: pointer;
+will-change: box-shadow,transform;
+background: radial-gradient( 100% 100% at 100% 0%, #89E5FF 0%, #5468FF 100% );
+box-shadow: 0px 2px 4px rgb(45 35 66 / 40%), 0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px rgb(58 65 111 / 50%);
+padding: 0 32px;
+border-radius: 6px;
+color: #fff;
+height: 32px;
+font-size: 18px;
+text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+transition: box-shadow 0.15s ease,transform 0.15s ease;
+}
+button:hover{
+  color:black;
+}
+button:focus{
+  /*  after click */
+}
+
+
+
+
