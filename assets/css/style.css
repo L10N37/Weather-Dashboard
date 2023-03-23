@@ -75,11 +75,13 @@ border-top: solid black;
 padding: 5px 5px 5px 5px;
 }
 
+
 /* multiple ID wildcard (similar ID name */
 div[id^='box']:hover {
   background: lightblue;
 }
-
-
+div[id^='box']{
+font-size: 50%;
+}
 
 
