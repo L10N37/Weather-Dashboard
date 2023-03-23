@@ -28,6 +28,8 @@ let APIKey= "15f30b5439aba93a71279745353860e6";
 let globalObjectStorage = [];
 let globalCountries = [];
 let globalCities = [];
+let globalCoordinatesLat= [];
+let globalCoordinatesLon= [];
 let globalSpacing = '&nbsp&nbsp&nbsp&nbsp'
 let searchConfirmationBoxes = ['box1','box2','box3','box4','box5']
 
@@ -57,15 +59,17 @@ function clickedSearch(searchQuery) {
         y.id=searchConfirmationBoxes[i];
         getClass("searchAreaContainer").appendChild(y);
       }
+    // Click event listener on search options
+    for (let i = 0; i < 5; i++) {
+      getID(searchConfirmationBoxes[i]).addEventListener("click", function(event) {
+        console.log("Clicked: " +searchConfirmationBoxes[i])
+        
 
-        // Click event listener on search options
-  for (let i = 0; i < 5; i++) {
-    getID(searchConfirmationBoxes[i]).addEventListener("click", function(event) {
-      console.log("Clicked" +searchConfirmationBoxes[i])
-    })
-  }
 
- 
+
+
+          })
+        }
 }
  
   // Click event listener on search button
@@ -88,11 +92,15 @@ let toObject = (data) => {
   for (let i = 0; i < globalObjectStorage.length; i++) {
     globalCountries[i]= globalObjectStorage[i].country;
     globalCities[i]= globalObjectStorage[i].name;
+    globalCoordinatesLat[i]= globalObjectStorage[i].lat;
+    globalCoordinatesLon[i]=globalObjectStorage[i].lon;
     getID(searchConfirmationBoxes[i]).innerHTML= 
     "Country: "+ globalCountries[i] +
     globalSpacing +
    "City: "+ globalCities[i] +
     "<br>";
+
+    console.log("Area" + i +" Coordinates-- " + "Latitude:"+globalCoordinatesLat[i]+ " Longitude:"+ globalCoordinatesLon[i]);
     }
 }
 
