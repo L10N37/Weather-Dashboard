@@ -70,9 +70,15 @@ function clickedSearch(searchQuery) {
 
 }
 
+let toWeatherStats= (data) => {
+  globalWeatherStats = data;
+  console.log(globalWeatherStats);
+}
+
 // This takes the returned fetch data and stores it as an object variable so we can use this data
-// in the application, it also sets up the search options inner text, element creation is placed here 
-//because it allows the variable containing the fetched object to exist first.
+// in the application, it also sets up the search options inner text, element creation is placed here
+// because it allows the variable containing the fetched object to exist first. A lot more logic is placed
+// here in this large variable function for the same reason.
 let toObject = (data) => {
   globalObjectStorage = data;
   console.log(globalObjectStorage);
@@ -102,13 +108,18 @@ if (globalObjectStorage.length > 0) {
     console.log("Area" + i +" Coordinates-- " + "Latitude:"+globalCoordinatesLat[i]+ " Longitude:"+ globalCoordinatesLon[i]);
 
         // Click event listener on search options IF a valid search was performed
-        if(getClass("possibleMatchesClass")) {
+        
           for (let i = 0; i < 5; i++) {
             getID(searchConfirmationBoxes[i]).addEventListener("click", function(event) {
               console.log("Clicked: " +searchConfirmationBoxes[i])
+              
+              fetch("http://api.openweathermap.org/data/2.5/forecast?lat="+globalCoordinatesLat[i]+"&lon="+globalCoordinatesLon[i]+"&appid="+APIKey)
+              .then(response => response.json())
+                .then(data => toWeatherStats(data));
+
+
                 })
               }
-            }
       }
    }
 }
