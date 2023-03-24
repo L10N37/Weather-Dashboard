@@ -68,7 +68,7 @@ function clickedSearch(searchQuery) {
     
     console.log("Search Query: " + searchQuery);
     
-    fetch("http://api.openweathermap.org/geo/1.0/direct?q="+searchQuery+"&limit=5&appid="+APIKey)
+    fetch("https://api.openweathermap.org/geo/1.0/direct?q="+searchQuery+"&limit=5&appid="+APIKey)
       .then(response => response.json())
         .then(data => toObject(data))
 }
@@ -190,7 +190,7 @@ if (globalObjectStorage.length > 0) {
 }
 
 function searchOptionQuery(z,y){
-  fetch("http://api.openweathermap.org/data/2.5/forecast?lat="+z+"&lon="+y+"&appid="+APIKey+"&units=metric")
+  fetch("https://api.openweathermap.org/data/2.5/forecast?lat="+z+"&lon="+y+"&appid="+APIKey+"&units=metric")
   .then(response => response.json())
     .then(data => toWeatherStats(data));
 }
