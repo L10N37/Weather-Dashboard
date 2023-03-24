@@ -139,11 +139,11 @@ let toWeatherStats= (data) => {
           "</h2>" +
           // Temp / Wind/ Humidity
           "Temp: " +
-          globalWeatherStats.list[0].main.temp+"°C <br>"+
+          globalWeatherStats.list[forecastIndex].main.temp+"°C <br>"+
           "Humidity: "+
-          globalWeatherStats.list[0].main.humidity+"% <br>"+
+          globalWeatherStats.list[forecastIndex].main.humidity+"% <br>"+
           "Wind: "+
-          globalWeatherStats.list[0].wind.speed+" KPH"
+          globalWeatherStats.list[forecastIndex].wind.speed+" KPH"
           ;
     // Weather Icon
     let appendTo = document.querySelector('h2');
