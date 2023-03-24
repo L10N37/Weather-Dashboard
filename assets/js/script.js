@@ -34,6 +34,9 @@ api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
 
 */
 
+// This returns the current hour of the day (using Day.js)
+//console.log("Current hour of the Day: "+ dayjs().hour());
+
 let APIKey= "15f30b5439aba93a71279745353860e6";
 let globalObjectStorage = [];
 let globalCountries = [];
@@ -83,10 +86,49 @@ let toWeatherStats= (data) => {
       For code 500 - light rain icon = "10d". See below a full list of codes
       URL is https://openweathermap.org/img/wn/10d@2x.png
 */
-    const date = new Date().toLocaleDateString();
+      const date = new Date().toLocaleDateString();
       let iconCode= globalWeatherStats.list[0].weather[0].icon;
       let iconAltText = globalWeatherStats.list[0].weather[0].description;
       let weatherIcon= "https://openweathermap.org/img/wn/"+iconCode+"@2x.png";
+      let slicedForecastDay;
+      // Day of month (string)
+      let currentDay = date.slice(0,2);
+      // unary conversion to number
+      currentDay= +currentDay;
+      // hour of day/s in forecasts, converted to a number below
+      let slicedForecastHour;
+      // day JS hour of day
+      let currentHour = dayjs().hour();
+      // most current index of forecast/s storage, ignore prior
+      let forecastIndex;
+
+      // Fetch the most recent weather update for the top of the weather dash results
+      // 8 iterations max for 8*3 being 24 hours (3 hour updates)
+      for (let i = 0; i<8; i++) {
+        // slice the forecast hour
+        slicedForecastHour= globalWeatherStats.list[i].dt_txt.slice(10);
+          slicedForecastHour= slicedForecastHour.slice(1,3);
+              // convert sliced forecast hour of day to a number with unary plus operator
+              slicedForecastDay = +slicedForecastHour;
+                // slice the forecast day/s and convert to a number for comparison against current day
+                slicedForecastDay = globalWeatherStats.list[i].dt_txt.slice(8);
+                  slicedForecastDay = slicedForecastDay.slice(0,3);
+                    slicedForecastDay = +slicedForecastDay;
+                      // so we can see which element the loop breaks on (for testing)
+                      forecastIndex = i;
+              // check if it is the same hour of day OR the next closest forecast update
+              // this is what we want to display as the current forecast for our search
+              if (slicedForecastHour>currentHour && slicedForecastDay===currentDay || slicedForecastHour==currentHour && slicedForecastDay===currentDay){
+                console.log ("FORECAST DAY: "+slicedForecastDay);
+                console.log ("CURRENT DAY: "+currentDay);
+                console.log ("Current Hour: "+ currentHour);
+                console.log ("SLICED FORECAST HOUR: "+slicedForecastHour);
+                break;
+                }
+              }
+            
+      console.log("Forecast Index :"+forecastIndex);
+
       let addDash= getID('dashHeading');
         addDash.innerHTML=
         // City Name and current date - date formatted as per mock up
@@ -109,6 +151,29 @@ let toWeatherStats= (data) => {
         addIcon.src=weatherIcon;
           addIcon.setAttribute("alt",iconAltText);
             appendTo.appendChild(addIcon);
+  // future 5 day forecast
+  /* General Algorithm 
+  1: Grab the current day of month first for comparison to forecast object elements.
+  element 0 of weather forecast object is NOT necessarily the current day, i.e. it just changed from lastnights 9pm 
+  forecast to the current days midnight forecast just now before 6am.
+  
+  2: Move forward in the array until date changes, grab the next array element and move it into it's own 
+    variable, rinse repeat until we have 5 future day forecasts all stored in separate variables for processing */
+    //let slicedForecastDay; -> moved
+    //let currentDay = date.slice(0,2); -> moved 
+    let forecast5Day = [];
+    
+    
+    for (let i = 0; i<40; i++) {
+      slicedForecastDay = globalWeatherStats.list[i].dt_txt.slice(8);
+        slicedForecastDay = slicedForecastDay.slice(0,3);
+            // if the elements day is not todays day, tell us which element that is
+            // and update the current day variable to the next day, rinse repeat
+              if (slicedForecastDay!=currentDay){
+                console.log("Array Element: " + i);
+                  currentDay = slicedForecastDay;
+                }
+              }
 }
 
 // this takes the returned fetch data (initial search) and stores it as an object variable so we can use this data

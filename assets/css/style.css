@@ -100,7 +100,7 @@ h2{
 }
 
 .dashContainer5Day {
-  background-color:pink; /* --> for a positioning aid */
+  /*background-color:pink; /* --> for a positioning aid */
   width: 550px;
   display: flex;
   position:absolute;
@@ -114,18 +114,10 @@ height: 50px;
 width:50px;
 }
 
-.childHeading {
-  background-color: rgb(116, 255, 116);
-  width: 500px;
-  height: 300px;
-  border:lightgray solid 6px;
-}
-
-.child {
-  background-color: rgb(116, 255, 116);
-  width: 300px;
-  height: 300px;
-  border:lightgray solid 6px;
+.forecast {
+  background-color: lightskyblue;
+  padding: 8px;
+  border: solid lightgrey;
 }
 
 /* Mobile screen res adjustments */
