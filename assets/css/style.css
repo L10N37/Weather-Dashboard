@@ -86,17 +86,12 @@ font-size: 50%;
 
 #dashHeading{
   /* background-color:white; /* --> for a positioning aid*/
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:left;
-  width:550px;
-  height: 350px;
+  width:600px;
   position:absolute;
   top: 70px;
   right:20%;
   font-size:26px;
   font-style:bolder;
-  color: black;
 }
 
 h2{
@@ -115,8 +110,8 @@ h2{
 
 /* weather Icon size adjustment */
 img{
-width: 25%;
-height:25%;
+height: 50px;
+width:50px;
 }
 
 .childHeading {

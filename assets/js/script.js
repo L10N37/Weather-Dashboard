@@ -61,10 +61,6 @@ function clickedSearch(searchQuery) {
         getID(searchConfirmationBoxes[i]).parentNode.removeChild(getID(searchConfirmationBoxes[i]));
       }
     }
-    /*
-    if (getID('dashHeading')){
-      getID('dashHeading').parentNode.removeChild(getID('dashHeading'));
-    } */
     
     console.log("Search Query: " + searchQuery);
     
@@ -89,13 +85,14 @@ let toWeatherStats= (data) => {
 */
     const date = new Date().toLocaleDateString();
       let iconCode= globalWeatherStats.list[0].weather[0].icon;
+      let iconAltText = globalWeatherStats.list[0].weather[0].description;
       let weatherIcon= "https://openweathermap.org/img/wn/"+iconCode+"@2x.png";
       let addDash= getID('dashHeading');
         addDash.innerHTML=
         // City Name and current date - date formatted as per mock up
           "<h2>" +
           globalWeatherStats.city.name +
-          globalSpacing +
+          "&nbsp" +
           "("+date+")"+
           "</h2>" +
           // Temp / Wind/ Humidity
@@ -107,13 +104,11 @@ let toWeatherStats= (data) => {
           globalWeatherStats.list[0].wind.speed+" KPH"
           ;
     // Weather Icon
-    let appendTo = getID('dashHeading');
+    let appendTo = document.querySelector('h2');
       let addIcon = document.createElement("img");
         addIcon.src=weatherIcon;
-          appendTo.appendChild(addIcon);
- 
-
-
+          addIcon.setAttribute("alt",iconAltText);
+            appendTo.appendChild(addIcon);
 }
 
 // this takes the returned fetch data (initial search) and stores it as an object variable so we can use this data
