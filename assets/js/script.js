@@ -34,9 +34,6 @@ api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
 
 */
 
-// This returns the current hour of the day (using Day.js)
-//console.log("Current hour of the Day: "+ dayjs().hour());
-
 let APIKey= "15f30b5439aba93a71279745353860e6";
 let globalObjectStorage = [];
 let globalCountries = [];
@@ -84,12 +81,9 @@ let toWeatherStats= (data) => {
       https://openweathermap.org/weather-conditions
       How to get icon URL
       For code 500 - light rain icon = "10d". See below a full list of codes
-      URL is https://openweathermap.org/img/wn/10d@2x.png
-*/
+      URL is https://openweathermap.org/img/wn/10d@2x.png                     
+      */
       const date = new Date().toLocaleDateString();
-      let iconCode= globalWeatherStats.list[0].weather[0].icon;
-      let iconAltText = globalWeatherStats.list[0].weather[0].description;
-      let weatherIcon= "https://openweathermap.org/img/wn/"+iconCode+"@2x.png";
       let slicedForecastDay;
       // Day of month (string)
       let currentDay = date.slice(0,2);
@@ -129,6 +123,10 @@ let toWeatherStats= (data) => {
             
       console.log("Current Weather Element:"+forecastIndex);
 
+      let iconCode= globalWeatherStats.list[forecastIndex].weather[0].icon;
+      let iconAltText = globalWeatherStats.list[forecastIndex].weather[0].description;
+      let weatherIcon= "https://openweathermap.org/img/wn/"+iconCode+"@2x.png";
+
       let addDash= getID('dashHeading');
         addDash.innerHTML=
         // City Name and current date - date formatted as per mock up
@@ -151,6 +149,7 @@ let toWeatherStats= (data) => {
         addIcon.src=weatherIcon;
           addIcon.setAttribute("alt",iconAltText);
             appendTo.appendChild(addIcon);
+            
   // future 5 day forecast
   /* General Algorithm 
   1: Grab the current day of month first for comparison to forecast object elements.
@@ -161,7 +160,7 @@ let toWeatherStats= (data) => {
     variable, rinse repeat until we have 5 future day forecasts all stored in separate variables for processing */
     //let slicedForecastDay; -> moved
     //let currentDay = date.slice(0,2); -> moved 
-    let forecast5Day = [];
+    let futureForecast = [];
     let y =0;
     for (let i = forecastIndex; i<40-forecastIndex; i++) {
       slicedForecastDay = globalWeatherStats.list[i].dt_txt.slice(8);
@@ -173,11 +172,21 @@ let toWeatherStats= (data) => {
                   currentDay = slicedForecastDay;
                   // below i is == midnight
                   // +1 == 3am, +2 == 6am, +3 == 9am, +4 == midday etc.
-                  forecast5Day[y] =globalWeatherStats.list[i+4];
+                  futureForecast[y] =globalWeatherStats.list[i+4];
                   y++;
                 }
               }
-              console.log(forecast5Day);
+              console.log(futureForecast);
+    
+    // roll out the next 4 day forecasts, element/s already exist, we just need to populate them with the data 
+    // we stored in 'futureForecast'
+    let forecastBoxes = ['forecastBox1','forecastBox2','forecastBox3','forecastBox4'];
+    for (let i = 0; i< 4; i++) {
+      let forecastData = getID(forecastBoxes[i]);
+        forecastData.innerHTML= 
+        futureForecast[i].dt_txt + "<br>";
+
+    }
 }
 
 // this takes the returned fetch data (initial search) and stores it as an object variable so we can use this data
