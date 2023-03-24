@@ -24,4 +24,4 @@
 
 ## Live link to deployed application
 <br />
-www.placeholder.com
+https://l10n37.github.io/Weather-Dashboard
