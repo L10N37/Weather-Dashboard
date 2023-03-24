@@ -43,20 +43,19 @@ let globalCoordinatesLat= [];
 let globalCoordinatesLon= [];
 let globalSpacing = '&nbsp&nbsp&nbsp&nbsp'
 let searchConfirmationBoxes = ['box1','box2','box3','box4','box5']
-let globalWeatherStats;
+let globalWeatherStats = [];
 
   // Click event listener on search button
   getID("searchButton").addEventListener("click", function(event) {
     clickedSearch(getID("searchTextEntry").value);
 })
 
-
 function clickedSearch(searchQuery) {
     
-    // for multiple searches, remove the old search options stuff
+    // for multiple searches, remove the old search options stuff and reset query boolean
     if (getID('possibleMatchesID')) {
       getID('possibleMatchesID').parentNode.removeChild(getID('possibleMatchesID'));
-    }
+      }
     if (getClass("possibleMatchesClass")){
       for (let i = 0; i < 5; i++) {
         getID(searchConfirmationBoxes[i]).parentNode.removeChild(getID(searchConfirmationBoxes[i]));
@@ -68,18 +67,19 @@ function clickedSearch(searchQuery) {
     fetch("http://api.openweathermap.org/geo/1.0/direct?q="+searchQuery+"&limit=5&appid="+APIKey)
       .then(response => response.json())
         .then(data => toObject(data))
-
 }
 
+// this takes the returned fetch data (search confirmation) and stores it as an object variable so we can
+// use this data in the application
 let toWeatherStats= (data) => {
   globalWeatherStats = data;
   console.log(globalWeatherStats);
 }
 
-// This takes the returned fetch data and stores it as an object variable so we can use this data
+// this takes the returned fetch data (initial search) and stores it as an object variable so we can use this data
 // in the application, it also sets up the search options inner text, element creation is placed here
 // because it allows the variable containing the fetched object to exist first. A lot more logic is placed
-// here in this large variable function for the same reason.
+// here in this large variable function for the same reason
 let toObject = (data) => {
   globalObjectStorage = data;
   console.log(globalObjectStorage);
@@ -94,13 +94,14 @@ if (globalObjectStorage.length > 0) {
           getClass("searchAreaContainer").appendChild(y);
           }
   // extract/ format the information we need from fetched object
-  // globalObjectStorage.length is == fetches "&limit=X", default X= 5.
+  // globalObjectStorage.length is == fetches "&limit=X", default X= 5
   for (let i = 0; i < globalObjectStorage.length; i++) {
     globalCountries[i]= globalObjectStorage[i].country;
-    globalCities[i]= globalObjectStorage[i].name;
-    globalStates[i]= globalObjectStorage[i].state;
-    globalCoordinatesLat[i]= globalObjectStorage[i].lat;
-    globalCoordinatesLon[i]=globalObjectStorage[i].lon;
+      globalCities[i]= globalObjectStorage[i].name;
+        globalStates[i]= globalObjectStorage[i].state;
+          globalCoordinatesLat[i]= globalObjectStorage[i].lat;
+            globalCoordinatesLon[i]=globalObjectStorage[i].lon;
+
     getID(searchConfirmationBoxes[i]).innerHTML= 
     "Country: "+ globalCountries[i] +
     globalSpacing +
@@ -111,20 +112,48 @@ if (globalObjectStorage.length > 0) {
 
     console.log("Area" + i +" Coordinates-- " + "Latitude:"+globalCoordinatesLat[i]+ " Longitude:"+ globalCoordinatesLon[i]);
 
-        // Click event listener on search options IF a valid search was performed
-        
-          for (let i = 0; i < 5; i++) {
-            getID(searchConfirmationBoxes[i]).addEventListener("click", function(event) {
-              console.log("Clicked: " +searchConfirmationBoxes[i])
-            
-              
-              fetch("http://api.openweathermap.org/data/2.5/forecast?lat="+globalCoordinatesLat[i]+"&lon="+globalCoordinatesLon[i]+"&appid="+APIKey)
-              .then(response => response.json())
-                .then(data => toWeatherStats(data));
-              })
-            }      
       }
    }
+        // Click event listener on search options IF a valid search was performed
+        // the co-ordinates for ALL 5 options are already stored in an array
+        // just need to choose one, depending on which is clicked, and send the corresponding API query
+        // long winded switch statement otherwise we either send 5 queries or can only send one query per page load
+        let id;
+        if (getClass('possibleMatchesClass')){
+        for (let i = 0; i < 5; i++) {
+          getID(searchConfirmationBoxes[i]).addEventListener("click", function(event) {
+            id = event.target.id;
+              switch (id) {
+                case "box1":
+                 console.log("query element 0 clicked");
+                 searchOptionQuery(globalCoordinatesLat[0],globalCoordinatesLon[0]);
+                  break;
+                case "box2":
+                  console.log("query element 1 clicked");
+                  searchOptionQuery(globalCoordinatesLat[1],globalCoordinatesLon[1]);
+                  break;
+                case "box3":
+                  console.log("query element 2 clicked");
+                  searchOptionQuery(globalCoordinatesLat[2],globalCoordinatesLon[2]);
+                  break;
+                case "box4":
+                  console.log("query element 3 clicked");
+                  searchOptionQuery(globalCoordinatesLat[3],globalCoordinatesLon[3]);
+                  break;
+                case "box5":
+                  console.log("query element 4 clicked");
+                  searchOptionQuery(globalCoordinatesLat[4],globalCoordinatesLon[4]);
+                    break;
+              }
+            });
+          }
+        }     
+}
+
+function searchOptionQuery(z,y){
+  fetch("http://api.openweathermap.org/data/2.5/forecast?lat="+z+"&lon="+y+"&appid="+APIKey)
+  .then(response => response.json())
+    .then(data => toWeatherStats(data));
 }
 
 // just functions where the syntax for common calls is modified to my own liking
