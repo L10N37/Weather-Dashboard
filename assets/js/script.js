@@ -127,7 +127,7 @@ let toWeatherStats= (data) => {
                 }
               }
             
-      console.log("Forecast Index :"+forecastIndex);
+      console.log("Current Weather Element:"+forecastIndex);
 
       let addDash= getID('dashHeading');
         addDash.innerHTML=
@@ -162,18 +162,20 @@ let toWeatherStats= (data) => {
     //let slicedForecastDay; -> moved
     //let currentDay = date.slice(0,2); -> moved 
     let forecast5Day = [];
-    
-    
-    for (let i = 0; i<40; i++) {
+    let y =0;
+    for (let i = forecastIndex; i<40-forecastIndex; i++) {
       slicedForecastDay = globalWeatherStats.list[i].dt_txt.slice(8);
         slicedForecastDay = slicedForecastDay.slice(0,3);
             // if the elements day is not todays day, tell us which element that is
             // and update the current day variable to the next day, rinse repeat
               if (slicedForecastDay!=currentDay){
-                console.log("Array Element: " + i);
+                console.log("Array Elements Required: " + i);
                   currentDay = slicedForecastDay;
+                  forecast5Day[y] =globalWeatherStats.list[i];
+                  y++;
                 }
               }
+              console.log(forecast5Day);
 }
 
 // this takes the returned fetch data (initial search) and stores it as an object variable so we can use this data
@@ -209,9 +211,6 @@ if (globalObjectStorage.length > 0) {
     globalSpacing +
    "State: "+ globalStates[i] +
     "<br>";
-
-    console.log("Area" + i +" Coordinates-- " + "Latitude:"+globalCoordinatesLat[i]+ " Longitude:"+ globalCoordinatesLon[i]);
-
       }
    }
         // Click event listener on search options IF a valid search was performed
