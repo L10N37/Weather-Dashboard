@@ -181,11 +181,20 @@ let toWeatherStats= (data) => {
     // roll out the next 4 day forecasts, element/s already exist, we just need to populate them with the data 
     // we stored in 'futureForecast'
     let forecastBoxes = ['forecastBox1','forecastBox2','forecastBox3','forecastBox4'];
-    for (let i = 0; i< 4; i++) {
-      let forecastData = getID(forecastBoxes[i]);
-        forecastData.innerHTML= 
-        futureForecast[i].dt_txt + "<br>";
+      for (let i = 0; i< 4; i++) {
+        iconCode= futureForecast[i].weather[0].icon;
+          iconAltText = futureForecast[i].weather.description;
+            weatherIcon= "https://openweathermap.org/img/wn/"+iconCode+"@2x.png";
+              let forecastData = getID(forecastBoxes[i]);
 
+        forecastData.innerHTML= 
+        futureForecast[i].dt_txt + "<br>" +
+        "<img src="+weatherIcon+"> </img> <br>" +
+        "Temp: " + futureForecast[i].main.temp + "°C <br>" +
+        "Humidity: " + futureForecast[i].main.humidity+"% <br>"+
+        "Wind: " + futureForecast[i].wind.speed + "KPH";
+        // alt img attribute/s
+        forecastData.setAttribute("alt",iconAltText);
     }
 }
 
