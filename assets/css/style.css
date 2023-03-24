@@ -17,15 +17,14 @@ text-align:center;
 background-image:url('../images/blue-sky-with-white-clouds-sky-background.jpg');
 background-size: cover;
 background-position: center;
-width: 100%;
+width: 96%;
 border: orange outset;
 }
 
 .searchAreaContainer{
   overflow: hidden;
-  float: left;
   position:absolute;
-  top:60px;
+  top:70px;
   padding:5px 5px 5px 5px;
   border: orange solid;
 }
@@ -67,6 +66,7 @@ text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
 transition: box-shadow 0.15s ease,transform 0.15s ease;
 }
 #searchButton.button-21:hover{
+  transition: color 1.5s;
   color:black;
 }
 
@@ -75,7 +75,6 @@ border-top: solid black;
 padding: 5px 5px 5px 5px;
 }
 
-
 /* multiple ID wildcard (similar ID name */
 div[id^='box']:hover {
   background: lightblue;
@@ -83,5 +82,68 @@ div[id^='box']:hover {
 div[id^='box']{
 font-size: 50%;
 }
+/*                                        */
 
+#dashHeading{
+  /* background-color:white; /* --> for a positioning aid*/
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:left;
+  width:550px;
+  height: 350px;
+  position:absolute;
+  top: 70px;
+  right:20%;
+  font-size:26px;
+  font-style:bolder;
+  color: black;
+}
 
+.dashContainer5Day {
+  background-color:pink; /* --> for a positioning aid */
+  width: 550px;
+  display: flex;
+  position:absolute;
+  top:30%;
+  right:20%;
+}
+
+/* weather Icon size adjustment */
+img{
+width: 25%;
+height:25%;
+}
+
+.childHeading {
+  background-color: rgb(116, 255, 116);
+  width: 500px;
+  height: 300px;
+  border:lightgray solid 6px;
+}
+
+.child {
+  background-color: rgb(116, 255, 116);
+  width: 300px;
+  height: 300px;
+  border:lightgray solid 6px;
+}
+
+/* Mobile screen res adjustments */
+@media only screen and (max-width: 1128px) {
+  .parent {
+    display: flex;
+    position:absolute;
+    flex-wrap: wrap;
+    right:3%; 
+    top: 80%;
+  }
+
+  .dashContainer5Day {
+    width: 550px;
+    display: flex;
+    flex-wrap:wrap;
+    background-color: orange;
+    position:absolute;
+    top:30%;
+  }
+}

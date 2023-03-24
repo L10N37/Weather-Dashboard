@@ -61,6 +61,10 @@ function clickedSearch(searchQuery) {
         getID(searchConfirmationBoxes[i]).parentNode.removeChild(getID(searchConfirmationBoxes[i]));
       }
     }
+    /*
+    if (getID('dashHeading')){
+      getID('dashHeading').parentNode.removeChild(getID('dashHeading'));
+    } */
     
     console.log("Search Query: " + searchQuery);
     
@@ -70,16 +74,39 @@ function clickedSearch(searchQuery) {
 }
 
 // this takes the returned fetch data (search confirmation) and stores it as an object variable so we can
-// use this data in the application
+// use this data in the application, some element creation is placed here due to requiring the information
+// from variables created in this section
 let toWeatherStats= (data) => {
   globalWeatherStats = data;
+  console.log("Weather Info now stored as object, format as follows: ");
   console.log(globalWeatherStats);
+
+      /* Roll out the dash elements
+      https://openweathermap.org/weather-conditions
+      How to get icon URL
+      For code 500 - light rain icon = "10d". See below a full list of codes
+      URL is https://openweathermap.org/img/wn/10d@2x.png
+*/
+    const date = new Date().toLocaleDateString();
+      let iconCode= globalWeatherStats.list[0].weather[0].icon;
+      let weatherIcon= "https://openweathermap.org/img/wn/"+iconCode+"@2x.png";
+      let addDash= getID('dashHeading');
+        addDash.innerHTML=
+          globalWeatherStats.city.name +
+          globalSpacing +
+          date +
+          globalSpacing;
+    // Weather Icon
+    let appendTo = getID('dashHeading');
+      let addIcon = document.createElement("img");
+        addIcon.src=weatherIcon;
+          appendTo.appendChild(addIcon);
 }
 
 // this takes the returned fetch data (initial search) and stores it as an object variable so we can use this data
 // in the application, it also sets up the search options inner text, element creation is placed here
-// because it allows the variable containing the fetched object to exist first. A lot more logic is placed
-// here in this large variable function for the same reason
+// because it allows the variable containing the fetched object to exist first. A lot of logic is placed
+// here for the same reason
 let toObject = (data) => {
   globalObjectStorage = data;
   console.log(globalObjectStorage);
@@ -118,7 +145,6 @@ if (globalObjectStorage.length > 0) {
         // the co-ordinates for ALL 5 options are already stored in an array
         // just need to choose one, depending on which is clicked, and send the corresponding API query
         // long winded switch statement otherwise we either send 5 queries or can only send one query per page load
-        let id;
         if (getClass('possibleMatchesClass')){
         for (let i = 0; i < 5; i++) {
           getID(searchConfirmationBoxes[i]).addEventListener("click", function(event) {
@@ -143,15 +169,15 @@ if (globalObjectStorage.length > 0) {
                 case "box5":
                   console.log("query element 4 clicked");
                   searchOptionQuery(globalCoordinatesLat[4],globalCoordinatesLon[4]);
-                    break;
+                break;
               }
             });
           }
-        }     
+        }
 }
 
 function searchOptionQuery(z,y){
-  fetch("http://api.openweathermap.org/data/2.5/forecast?lat="+z+"&lon="+y+"&appid="+APIKey)
+  fetch("http://api.openweathermap.org/data/2.5/forecast?lat="+z+"&lon="+y+"&appid="+APIKey+"&units=metric")
   .then(response => response.json())
     .then(data => toWeatherStats(data));
 }
