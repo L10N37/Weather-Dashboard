@@ -119,10 +119,10 @@ let toWeatherStats= (data) => {
               // check if it is the same hour of day OR the next closest forecast update
               // this is what we want to display as the current forecast for our search
               if (slicedForecastHour>currentHour && slicedForecastDay===currentDay || slicedForecastHour==currentHour && slicedForecastDay===currentDay){
-                console.log ("FORECAST DAY: "+slicedForecastDay);
-                console.log ("CURRENT DAY: "+currentDay);
+                console.log ("Forecast Day: "+slicedForecastDay);
+                console.log ("Current Day: "+currentDay);
                 console.log ("Current Hour: "+ currentHour);
-                console.log ("SLICED FORECAST HOUR: "+slicedForecastHour);
+                console.log ("ForeCast Hour: "+slicedForecastHour);
                 break;
                 }
               }
@@ -171,7 +171,9 @@ let toWeatherStats= (data) => {
               if (slicedForecastDay!=currentDay){
                 console.log("Array Elements Required: " + i);
                   currentDay = slicedForecastDay;
-                  forecast5Day[y] =globalWeatherStats.list[i];
+                  // below i is == midnight
+                  // +1 == 3am, +2 == 6am, +3 == 9am, +4 == midday etc.
+                  forecast5Day[y] =globalWeatherStats.list[i+4];
                   y++;
                 }
               }
