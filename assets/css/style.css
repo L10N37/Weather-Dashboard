@@ -99,6 +99,11 @@ font-size: 50%;
   color: black;
 }
 
+h2{
+  font-style:bolder;
+  font-size:30px;
+}
+
 .dashContainer5Day {
   background-color:pink; /* --> for a positioning aid */
   width: 550px;

@@ -92,15 +92,28 @@ let toWeatherStats= (data) => {
       let weatherIcon= "https://openweathermap.org/img/wn/"+iconCode+"@2x.png";
       let addDash= getID('dashHeading');
         addDash.innerHTML=
+        // City Name and current date - date formatted as per mock up
+          "<h2>" +
           globalWeatherStats.city.name +
           globalSpacing +
-          date +
-          globalSpacing;
+          "("+date+")"+
+          "</h2>" +
+          // Temp / Wind/ Humidity
+          "Temp: " +
+          globalWeatherStats.list[0].main.temp+"°C <br>"+
+          "Humidity: "+
+          globalWeatherStats.list[0].main.humidity+"% <br>"+
+          "Wind: "+
+          globalWeatherStats.list[0].wind.speed+" KPH"
+          ;
     // Weather Icon
     let appendTo = getID('dashHeading');
       let addIcon = document.createElement("img");
         addIcon.src=weatherIcon;
           appendTo.appendChild(addIcon);
+ 
+
+
 }
 
 // this takes the returned fetch data (initial search) and stores it as an object variable so we can use this data
