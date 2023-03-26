@@ -48,6 +48,10 @@ let globalWeatherStats = [];
   // Click event listener on search button
   getID("searchButton").addEventListener("click", function(event) {
     clickedSearch(getID("searchTextEntry").value);
+
+  // Store history
+  // fix alt text for future forecast days
+  
 })
 
 function clickedSearch(searchQuery) {
