@@ -1,19 +1,43 @@
-# title
+# Weather-Dashboard
 <br />
+Module 6 challenge for the Monash fullstack developer bootcamp.
+<br />|
 
 ## sub-title
 <br />
+User Story
 
+AS A traveler
+I WANT to see the weather outlook for multiple cities
+SO THAT I can plan a trip accordingly
+
+Acceptance Criteria
+
+GIVEN a weather dashboard with form inputs
+WHEN I search for a city
+THEN I am presented with current and future conditions for that city and that city is added to the search history
+WHEN I view current weather conditions for that city
+THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the the wind speed
+WHEN I view future weather conditions for that city
+THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
+WHEN I click on a city in the search history
+THEN I am again presented with current and future conditions for that city
 <br />
 
 ## Usage
 <br />
-
+When the application is first loaded you will have a blank search history. <br />
+You are free to go ahead and enter the location you are looking for a weather forecast on. <br />
+A new menu will appear to home in on your search as there could be multiple locations with the same name globally. Up to 5 option will appear. <br />
+Once you select the correct area, you will be presented with <br />
+1: The most current weather update. The app compares the current time of day, then uses some simple algorithms to determine the most suitable weather udpate to display for the current day. Either the weather prediction for the current hour will be displayed, or the next forecast which would be a maximum of 2 hours into the future from the time you performed the search.
+<br />
+2: The app is currently set up to display the next 4 days midday forecast. This is easily adjustable and commented in the code if for example you wanted to show the 9am or 3pm forecasts instead.
 <br />
 
 ## Features
 <br />
-
+Not much at this stage, just a 5 day weather forecast :)
 <br />
 
 ## Application Screenshot
