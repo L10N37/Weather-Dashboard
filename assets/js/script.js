@@ -181,24 +181,36 @@ let toWeatherStats= (data) => {
                 }
               }
               console.log(futureForecast);
+
+    // create forecast boxes, moved from HTML to on the fly creation in JS so we didn't have empty blue boxes existing
+    // pior to search. check if forecast already exists each click for multiple queries and remove old boxes before updating
+    for (let i= 0; i < 4; i++) {
+      let r = getClass('forecast');
+        if (r) r.parentNode.removeChild(r);
+        }
+        let forecastBoxes = ['forecastBox1','forecastBox2','forecastBox3','forecastBox4'];
+        for (let i= 0; i< forecastBoxes.length; i++) {
+          let createforecastBoxes= document.createElement("div");
+            let appendTo = getClass('dashContainer5Day');
+              createforecastBoxes.className= "forecast";
+                createforecastBoxes.id= forecastBoxes[i];
+                  appendTo.appendChild(createforecastBoxes);
+        }
     
     // roll out the next 4 day forecasts, element/s already exist, we just need to populate them with the data 
     // we stored in 'futureForecast'
-    let forecastBoxes = ['forecastBox1','forecastBox2','forecastBox3','forecastBox4'];
       for (let i = 0; i< 4; i++) {
         iconCode= futureForecast[i].weather[0].icon;
-          iconAltText = futureForecast[i].weather.description;
+          iconAltText = futureForecast[i].weather[0].description.replace(/ /g, "_");;
             weatherIcon= "https://openweathermap.org/img/wn/"+iconCode+"@2x.png";
               let forecastData = getID(forecastBoxes[i]);
 
         forecastData.innerHTML= 
-        futureForecast[i].dt_txt + "<br>" +
-        "<img src="+weatherIcon+"> </img> <br>" +
+        futureForecast[i].dt_txt + "<br> <br>" +
+        "<img src="+ weatherIcon +" alt=" + iconAltText + " <br> <br>" +
         "Temp: " + futureForecast[i].main.temp + "°C <br>" +
         "Humidity: " + futureForecast[i].main.humidity+"% <br>"+
         "Wind: " + futureForecast[i].wind.speed + "KPH";
-        // alt img attribute/s
-        forecastData.setAttribute("alt",iconAltText);
     }
 }
 
