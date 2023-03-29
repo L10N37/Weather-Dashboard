@@ -29,7 +29,7 @@ You are free to go ahead and enter the location you are looking for a weather fo
 <br />
 A new menu will appear to home in on your search as there could be multiple locations with the same name globally. Up to 5 option will appear. <br />
 <br />
-Once you select the correct area, you will be presented with <br />
+Once you select the correct area, you will be presented with the following --<br />
 1: The most current weather update. The app compares the current time of day, then uses some simple algorithms to determine the most suitable weather udpate to display for the current day. Either the weather prediction for the current hour will be displayed, or the next forecast which would be a maximum of 2 hours into the future from the time you performed the search.
 <br />
 <br />
