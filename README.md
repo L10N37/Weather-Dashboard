@@ -26,15 +26,19 @@ THEN I am again presented with current and future conditions for that city<br />
 <br />
 When the application is first loaded you will have a blank search history. <br />
 You are free to go ahead and enter the location you are looking for a weather forecast on. <br />
+<br />
 A new menu will appear to home in on your search as there could be multiple locations with the same name globally. Up to 5 option will appear. <br />
+<br />
 Once you select the correct area, you will be presented with <br />
 1: The most current weather update. The app compares the current time of day, then uses some simple algorithms to determine the most suitable weather udpate to display for the current day. Either the weather prediction for the current hour will be displayed, or the next forecast which would be a maximum of 2 hours into the future from the time you performed the search.
+<br />
 <br />
 2: The app is currently set up to display the next 4 days midday forecast. This is easily adjustable and commented in the code if for example you wanted to show the 9am or 3pm forecasts instead.
 <br />
 A previous search history has also being implemented with 5 prior searches saved. Once the 5 slots are filled, you would have to delete your browser history to reset the history slots.
 This could easily be expanded to store more search history slots.
 <br />
+
 ## Features
 <br />
 Not much at this stage, just a 5 day weather forecast.
