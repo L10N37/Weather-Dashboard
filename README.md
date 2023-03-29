@@ -34,10 +34,12 @@ Once you select the correct area, you will be presented with <br />
 <br />
 2: The app is currently set up to display the next 4 days midday forecast. This is easily adjustable and commented in the code if for example you wanted to show the 9am or 3pm forecasts instead.
 <br />
-
+A previous search history has also being implemented with 5 prior searches saved. Once the 5 slots are filled, you would have to delete your browser history to reset the history slots.
+This could easily be expanded to store more search history slots.
+<br />
 ## Features
 <br />
-Not much at this stage, just a 5 day weather forecast :)
+Not much at this stage, just a 5 day weather forecast.
 <br />
 
 ## Application Screenshot
