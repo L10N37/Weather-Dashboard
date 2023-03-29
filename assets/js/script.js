@@ -44,14 +44,45 @@ let globalCoordinatesLon= [];
 let globalSpacing = '&nbsp&nbsp&nbsp&nbsp'
 let searchConfirmationBoxes = ['box1','box2','box3','box4','box5']
 let globalWeatherStats = [];
+// Also used as ID's
+let globalSearchHistoryKeys = ['search1','search2','search3','search4','search5'];
+
+// copy locally stored strings from history, into history drop down menu
+for (let i = 0; i < 5; i++) {
+  let search = getID(globalSearchHistoryKeys[i]);
+  let removeChar;
+  if (localStorage.getItem(globalSearchHistoryKeys[i])!=null) {
+    removeChar = localStorage.getItem(globalSearchHistoryKeys[i]).replace(/['"]+/g, '');
+  }
+  else removeChar = null;
+   search.innerText= removeChar;
+    }
+
+  // Click event listener on search history items
+  // pass the search function the text from history drop down
+  for (let i = 0; i < 5; i++) {
+      search = getID(globalSearchHistoryKeys[i]);
+        search.addEventListener("click", function(event) {
+          // Passing history search straight to main search function
+          clickedSearch(localStorage.getItem(globalSearchHistoryKeys[i]));
+          /*
+          //Passing history text into search box
+          getID("searchTextEntry").value = localStorage.getItem(globalSearchHistoryKeys[i]).replace(/['"]+/g, '');
+          */
+        })
+      }
 
   // Click event listener on search button
   getID("searchButton").addEventListener("click", function(event) {
-    clickedSearch(getID("searchTextEntry").value);
-
-  // Store history
-  // fix alt text for future forecast days
-  
+  // store search in history
+  for (let i = 0; i < 5; i++) {
+    if (localStorage.getItem(globalSearchHistoryKeys[i])==null){
+    localStorage.setItem(globalSearchHistoryKeys[i], JSON.stringify(getID("searchTextEntry").value));
+    break;
+    }
+  }
+  // call main function, pass it the search query
+  clickedSearch(getID("searchTextEntry").value);
 })
 
 function clickedSearch(searchQuery) {

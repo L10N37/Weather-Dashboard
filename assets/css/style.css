@@ -22,7 +22,7 @@ border: orange outset;
 }
 
 .searchAreaContainer{
-  overflow: hidden;
+  /* overflow: hidden; Stops drop down menu for history working*/
   position:absolute;
   top:70px;
   padding:5px 5px 5px 5px;
@@ -118,6 +118,60 @@ width:50px;
   text-align:center;
   background: lightblue;
   border: solid lightgrey;
+}
+
+/* Style The Dropdown Button */
+.dropbtn {
+  display: inline-block;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  will-change: box-shadow,transform;
+  background: radial-gradient( 100% 100% at 100% 0%, #89E5FF 0%, #5468FF 100% );
+  box-shadow: 0px 2px 4px rgb(45 35 66 / 40%), 0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px rgb(58 65 111 / 50%);
+  padding: 0 32px;
+  border-radius: 6px;
+  color: #fff;
+  height: 26px;
+  font-size: 18px;
+  text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+  transition: box-shadow 0.15s ease,transform 0.15s ease;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 240px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: lightblue}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+button.dropbtn:hover{
+  transition: color 1.5s;
+  color:black;
 }
 
 /* Mobile screen res adjustments */
